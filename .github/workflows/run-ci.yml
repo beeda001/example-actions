@@ -43,11 +43,11 @@ jobs:
             --discard true                        \
             ./juice-shop.har)
           echo $FILE_ID
-          SCAN_ID=$(nexploit-cli scan:run                                                 \
-            --test csrf dom_xss header_security secret_tokens                             \
+          SCAN_ID=$(nexploit-cli scan:run                                                     \
+            --test csrf dom_xss header_security secret_tokens                                 \
             --name "💎 BrokenCrystals for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
-            --archive $FILE_ID                                                            \
-            --repeater ${{ secrets.REPEATER }}                                            \
+            --archive $FILE_ID                                                                \
+            --repeater ${{ secrets.REPEATER }}                                                \
             --token ${{ secrets.NEXPLOIT_TOKEN }})
           echo $SCAN_ID
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
@@ -58,7 +58,7 @@ jobs:
         run: |
           nexploit-cli scan:polling               \
             --interval 30s                        \
-            --timeout 5m                         \
+            --timeout 5m                          \
             --token ${{ secrets.NEXPLOIT_TOKEN }} \
             --breakpoint high_issue $SCAN_ID
       - name: Stop Scan 🛑
