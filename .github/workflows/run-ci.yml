@@ -44,7 +44,7 @@ jobs:
             ./juice-shop.har)
           echo $FILE_ID
           SCAN_ID=$(nexploit-cli scan:run                                                     \
-            --test csrf dom_xss header_security secret_tokens                                 \
+            --test csrf dom_xss                                                               \
             --name "💎 BrokenCrystals for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
             --archive $FILE_ID                                                                \
             --repeater ${{ secrets.REPEATER }}                                                \
